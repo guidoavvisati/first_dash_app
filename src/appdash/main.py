@@ -7,7 +7,7 @@ import numpy as np
 import os
 import flask
 
-from appdash.predictions import mtcars, preds, fit, cyl_enc
+from src.appdash.predictions import mtcars, preds, fit, cyl_enc
 
 
 """
