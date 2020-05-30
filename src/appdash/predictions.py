@@ -42,4 +42,5 @@ def preds(fit, cyl_enc, disp, qsec, am, cyl):
     return str(round(pred, 2))
 
 
-print(preds(fit, cyl_enc, 3650.0, 69.0, 0, "12"))
+if __name__ == "__main__":
+    print(preds(fit, cyl_enc, 3650.0, 69.0, 0, "12"))

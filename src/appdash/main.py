@@ -54,13 +54,20 @@ app.layout = html.Div(
             value=np.floor(mtcars["qsec"].mean()),
         ),
         html.H5("Number of cylinders:"),
+        html.Br(),
         dcc.RadioItems(
             id="input-cyl",
             options=opts_cyl,
             value=opts_cyl[0].get("value"),
             labelStyle={"display": "inline-block"},
         ),
-        daq.ToggleSwitch(id="input-am", label="Has manual transmission", value=False),
+        html.Br(),
+        daq.ToggleSwitch(
+            id="input-am",
+            label="Has manual transmission",
+            value=False,
+            style={"display": "inline-block"},
+        ),
         html.H2(id="output-prediction"),
     ]
 )
