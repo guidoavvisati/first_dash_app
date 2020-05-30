@@ -1,2 +1,2 @@
 def run():
-    pass
+    return True
