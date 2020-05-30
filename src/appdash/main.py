@@ -20,7 +20,7 @@ https://dash.plotly.com/external-resources
 """
 
 server = flask.Flask(__name__)
-server.secret_key = os.environ.get("secret_key", str(np.randint(0, 1000000)))
+server.secret_key = os.environ.get("secret_key", str(np.random.randint(0, 1000000)))
 
 external_stylesheets = [
     "https://codepen.io/chriddyp/pen/bWLwgP.css",
