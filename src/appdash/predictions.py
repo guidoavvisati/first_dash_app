@@ -4,7 +4,7 @@ import numpy as np
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import OneHotEncoder
 
-from appdash.constants import DATA_DIR
+from src.appdash.constants import DATA_DIR
 
 # load our data
 mtcars = pd.read_csv(

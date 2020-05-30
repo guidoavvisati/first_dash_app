@@ -7,7 +7,7 @@ import numpy as np
 import os
 import flask
 
-from appdash.predictions import mtcars, preds, fit, cyl_enc
+from src.appdash.predictions import mtcars, preds, fit, cyl_enc
 
 
 """
@@ -20,7 +20,7 @@ https://dash.plotly.com/external-resources
 """
 
 server = flask.Flask(__name__)
-server.secret_key = os.environ.get("secret_key", str(np.randint(0, 1000000)))
+server.secret_key = os.environ.get("secret_key", str(np.random.randint(0, 1000000)))
 
 external_stylesheets = [
     "https://codepen.io/chriddyp/pen/bWLwgP.css",
@@ -82,6 +82,30 @@ app.layout = html.Div(
             style={"display": "inline-block"},
         ),
         html.H2(id="output-prediction"),
+        html.Br(),
+        dcc.Dropdown(
+            id='my-dropdown',
+            options=[
+                {'label': 'Coke', 'value': 'COKE'},
+                {'label': 'Tesla', 'value': 'TSLA'},
+                {'label': 'Apple', 'value': 'AAPL'}
+            ],
+            value='COKE',
+            style={"background-color":"lightblue",
+                   "display": "inline-block",
+                   "width": "200px",
+                    "border": "2px solid blue",
+                   # "padding": "10px"
+            },
+        ),
+        html.Br(),
+        dcc.Graph(
+            id='my-graph',
+            style={
+                "display": "inline-block",
+                "width": "1000px",
+            },
+        )
     ]
 )
 
@@ -119,7 +143,16 @@ def callback_pred(disp: float, qsec: float, cyl: str, am: bool) -> str:
     # return a string that will be rendered in the UI
     return "Predicted MPG: {}".format(pred)
 
+@app.callback(dash.dependencies.Output('my-graph', 'figure'), [dash.dependencies.Input('my-dropdown', 'value')])
 
+def update_graph(selected_dropdown_value):
+    return {
+        'data': [{
+            'x': mtcars.index,
+            'y': mtcars.disp
+        }],
+        'layout': {'margin': {'l': 200, 'r': 200, 't': 20, 'b': 30}}
+    }
 # for running the app
 if __name__ == "__main__":
     app.server.run(debug=True, threaded=True)
