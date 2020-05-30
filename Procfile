@@ -1,1 +1,1 @@
-web: gunicorn src/main:server --timeout 300
+web: gunicorn src/appdash/main:server --timeout 300
