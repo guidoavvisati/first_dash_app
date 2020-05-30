@@ -69,6 +69,30 @@ app.layout = html.Div(
             style={"display": "inline-block"},
         ),
         html.H2(id="output-prediction"),
+        html.Br(),
+        dcc.Dropdown(
+            id='my-dropdown',
+            options=[
+                {'label': 'Coke', 'value': 'COKE'},
+                {'label': 'Tesla', 'value': 'TSLA'},
+                {'label': 'Apple', 'value': 'AAPL'}
+            ],
+            value='COKE',
+            style={"background-color":"lightblue",
+                   "display": "inline-block",
+                   "width": "200px",
+                    "border": "2px solid blue",
+                   # "padding": "10px"
+            },
+        ),
+        html.Br(),
+        dcc.Graph(
+            id='my-graph',
+            style={
+                "display": "inline-block",
+                "width": "1000px",
+            },
+        )
     ]
 )
 
@@ -106,7 +130,16 @@ def callback_pred(disp: float, qsec: float, cyl: str, am: bool) -> str:
     # return a string that will be rendered in the UI
     return "Predicted MPG: {}".format(pred)
 
+@app.callback(dash.dependencies.Output('my-graph', 'figure'), [dash.dependencies.Input('my-dropdown', 'value')])
 
+def update_graph(selected_dropdown_value):
+    return {
+        'data': [{
+            'x': mtcars.index,
+            'y': mtcars.disp
+        }],
+        'layout': {'margin': {'l': 200, 'r': 200, 't': 20, 'b': 30}}
+    }
 # for running the app
 if __name__ == "__main__":
     app.run_server(debug=True)
