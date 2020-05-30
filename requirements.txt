@@ -2,3 +2,8 @@ dash
 plotly
 numpy
 pandas
+pytest
+flake8
+black
+isort
+tox
