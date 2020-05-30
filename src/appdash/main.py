@@ -10,6 +10,7 @@ from appdash.predictions import mtcars, preds, fit, cyl_enc
 """
 dash apps are unstyled by default
 external CSS stylesheets
+https://dash.plotly.com/external-resources
 """
 external_stylesheets = [
     "https://codepen.io/chriddyp/pen/bWLwgP.css",
