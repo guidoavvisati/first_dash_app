@@ -1,6 +1,9 @@
 dash
+dash-renderer
 dash-daq
+flask
 plotly
+gunicorn
 numpy
 pandas
 scikit-learn
