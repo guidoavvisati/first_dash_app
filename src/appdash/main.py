@@ -4,21 +4,31 @@ import dash_core_components as dcc
 import dash_html_components as html
 import dash_daq as daq
 import numpy as np
+import os
+import flask
 
 from appdash.predictions import mtcars, preds, fit, cyl_enc
 
+
 """
+# Setup the app
+# the template is configured to execute 'server' on 'src/main.py'
+
 dash apps are unstyled by default
 external CSS stylesheets
 https://dash.plotly.com/external-resources
 """
+
+server = flask.Flask(__name__)
+server.secret_key = os.environ.get('secret_key', str(np.randint(0, 1000000)))
+
 external_stylesheets = [
     "https://codepen.io/chriddyp/pen/bWLwgP.css",
 ]
 
 # create an instance of a dash app
 app = dash.Dash(
-    __name__, external_scripts=None, external_stylesheets=external_stylesheets
+    __name__, external_scripts=None, external_stylesheets=external_stylesheets, server=server
 )
 app.title = "Predicting MPG"
 
@@ -109,4 +119,4 @@ def callback_pred(disp: float, qsec: float, cyl: str, am: bool) -> str:
 
 # for running the app
 if __name__ == "__main__":
-    app.run_server(debug=True)
+    app.server.run(debug=True, threaded=True)
