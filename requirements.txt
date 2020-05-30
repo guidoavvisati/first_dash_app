@@ -1,7 +1,9 @@
 dash
+dash-daq
 plotly
 numpy
 pandas
+scikit-learn
 pytest
 flake8
 black
