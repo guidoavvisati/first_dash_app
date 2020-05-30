@@ -11,3 +11,7 @@ test deployment to google
 6. 'heroku git:remote -a [YOUR-APP-NAME]'.
 7. 'git push heroku master' will deploy your app to Heroku
 8. 'heroku ps:scale web=1' will create a Dyno and make your app live
+
+For issues with infra-package-imports, please refer to 
+[here](https://stackoverflow.com/questions/46250019/python-flask-heroku-cannot-import-module) and
+[here](https://devcenter.heroku.com/articles/python-pip#local-file-backed-distributions)
