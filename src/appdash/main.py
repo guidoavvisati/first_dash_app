@@ -1,13 +1,11 @@
 # load the resuired modules
 import dash
-import dash_core_components as dcc
-import dash_html_components as html
-import dash_daq as daq
 import numpy as np
 import os
 import flask
 
 from src.appdash.predictions import mtcars, preds, fit, cyl_enc
+from src.appdash.layouts import layout_full, layout_minimal
 
 
 """
@@ -34,76 +32,7 @@ app = dash.Dash(
     server=server,
 )
 app.title = "Predicting MPG"
-
-# I compute these up front to avoid having to
-# calculate thes twice
-unq_cyl = np.sort(mtcars["cyl"].unique().astype(int)).astype(str)
-opts_cyl = [{"label": i, "value": str(i)} for i in unq_cyl]
-
-
-app.layout = html.Div(
-    [
-        html.H5("Displacement (in cubic inches):"),
-        html.Br(),
-        html.Br(),
-        daq.Slider(
-            id="input-disp",
-            min=np.floor(mtcars["disp"].min()),
-            max=np.ceil(mtcars["disp"].max()),
-            step=0.5,
-            dots=False,
-            handleLabel={"showCurrentValue": True, "label": "Value"},
-            value=np.floor(mtcars["disp"].mean()),
-        ),
-        html.H5("Quarter mile time:"),
-        html.Br(),
-        daq.Slider(
-            id="input-qsec",
-            min=np.floor(mtcars["qsec"].min()),
-            max=np.ceil(mtcars["qsec"].max()),
-            dots=False,
-            handleLabel={"showCurrentValue": True, "label": "Value"},
-            step=0.25,
-            value=np.floor(mtcars["qsec"].mean()),
-        ),
-        html.H5("Number of cylinders:"),
-        html.Br(),
-        dcc.RadioItems(
-            id="input-cyl",
-            options=opts_cyl,
-            value=opts_cyl[0].get("value"),
-            labelStyle={"display": "inline-block"},
-        ),
-        html.Br(),
-        daq.ToggleSwitch(
-            id="input-am",
-            label="Has manual transmission",
-            value=False,
-            style={"display": "inline-block"},
-        ),
-        html.H2(id="output-prediction"),
-        html.Br(),
-        dcc.Dropdown(
-            id="my-dropdown",
-            options=[
-                {"label": "Linear", "value": "LINEAR"},
-                {"label": "Log", "value": "LOG"},
-            ],
-            value="LINEAR",
-            style={
-                "background-color": "lightblue",
-                "display": "inline-block",
-                "width": "200px",
-                "border": "2px solid blue",
-                # "padding": "10px"
-            },
-        ),
-        html.Br(),
-        dcc.Graph(
-            id="my-graph", style={"display": "inline-block", "width": "1000px",},
-        ),
-    ]
-)
+app.layout = layout_minimal
 
 
 # callback will watch for changes in inputs and re-execute when any
@@ -132,7 +61,7 @@ def callback_pred(disp: float, qsec: float, cyl: str, am: bool) -> str:
     -------
     None
     """
-
+    print(am)
     pred = preds(
         fit=fit, cyl_enc=cyl_enc, disp=disp, qsec=qsec, am=np.float64(am), cyl=cyl
     )
