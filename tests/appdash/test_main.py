@@ -1,6 +1,6 @@
-from appdash.main import run
+from src.appdash.main import app
 
 
 class TestApp:
-    def test_run(self):
-        assert run()
+    def test_app_layout(self):
+        assert app.layout is not None
