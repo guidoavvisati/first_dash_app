@@ -1,4 +1,4 @@
-from appdash.main import app
+from src.appdash.main import app
 
 
 class TestApp:
