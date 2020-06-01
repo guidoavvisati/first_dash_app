@@ -32,7 +32,7 @@ app = dash.Dash(
     server=server,
 )
 app.title = "Predicting MPG"
-app.layout = layout_left_aligned
+app.layout = layout_centered
 
 
 # callback will watch for changes in inputs and re-execute when any
