@@ -5,7 +5,7 @@ import os
 import flask
 
 from src.appdash.predictions import mtcars, preds, fit, cyl_enc
-from src.appdash.layouts import layout_full, layout_minimal
+from src.appdash.layouts import layout_centered, layout_left_aligned
 
 
 """
@@ -32,7 +32,7 @@ app = dash.Dash(
     server=server,
 )
 app.title = "Predicting MPG"
-app.layout = layout_minimal
+app.layout = layout_left_aligned
 
 
 # callback will watch for changes in inputs and re-execute when any
@@ -43,7 +43,7 @@ app.layout = layout_minimal
         dash.dependencies.Input("input-disp", "value"),
         dash.dependencies.Input("input-qsec", "value"),
         dash.dependencies.Input("input-cyl", "value"),
-        dash.dependencies.Input("input-am", "value"),
+        dash.dependencies.Input("input-am", "on"),
     ],
 )
 def callback_pred(disp: float, qsec: float, cyl: str, am: bool) -> str:
@@ -61,7 +61,6 @@ def callback_pred(disp: float, qsec: float, cyl: str, am: bool) -> str:
     -------
     None
     """
-    print(am)
     pred = preds(
         fit=fit, cyl_enc=cyl_enc, disp=disp, qsec=qsec, am=np.float64(am), cyl=cyl
     )
