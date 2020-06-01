@@ -1,4 +1,5 @@
-![](https://github.com/guidoavvisati/first_dash_app/workflows/.github/workflows/python-app.yml/badge.svg)
+![](https://github.com/guidoavvisati/first_dash_app/workflows/integration/python-app.yml/badge.svg)
+![](https://badge.fury.io/py/tensorflow.svg)
 # First Dash App
 Replicate the dash steps from [here](https://www.rkingdc.com/blog/2019/3/6/shiny-vs-dash-a-side-by-side-comparison) and 
 test deployment to google
