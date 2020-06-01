@@ -12,3 +12,4 @@ flake8
 black
 isort
 tox
+coverage

@@ -39,7 +39,7 @@ mtcars = pd.read_csv(
     DATA_DIR / "mtcars_dummy.csv", dtype={"cyl": str, "am": np.float64}
 )
 
-fit , cyl_enc = make_fit(mtcars)
+fit, cyl_enc = make_fit(mtcars)
 
 
 if __name__ == "__main__":
