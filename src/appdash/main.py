@@ -1,11 +1,10 @@
-# load the resuired modules
 import dash
 import numpy as np
 import os
 import flask
 
-from src.appdash.predictions import mtcars, preds, fit, cyl_enc
-from src.appdash.layouts import layout_centered, layout_left_aligned
+from src.appdash.predictions import mtcars, preds, make_fit
+from src.appdash.layouts import layout_centered
 
 
 """
@@ -61,6 +60,7 @@ def callback_pred(disp: float, qsec: float, cyl: str, am: bool) -> str:
     -------
     None
     """
+    fit, cyl_enc = make_fit(mtcars)
     pred = preds(
         fit=fit, cyl_enc=cyl_enc, disp=disp, qsec=qsec, am=np.float64(am), cyl=cyl
     )
